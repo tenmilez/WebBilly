@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    <import resource="recipeasy-aspects.xml" />
+    <import resource="recipeasy-data.xml" />
+    <import resource="recipeasy-service.xml" />
+    <import resource="recipeasy-spring.xml" />
+    -->
+
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <bean id="simpleUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="order">
+            <value>0</value>
+        </property>
+        <property name="mappings">
+            <props>
+                <prop key="welcome.htm">welcomeController</prop>
+
+            </props>
+        </property>
+    </bean>
+
+    <bean id="welcomeController" class="com.webbilly.web.WelcomeController">
+
+    </bean>
+
+</beans>
