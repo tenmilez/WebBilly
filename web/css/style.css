@@ -34,7 +34,7 @@ h2 {
 h3 {
     padding-left: 10px;
     color: #fff;
-    background: #FE7B09 url(/pics/csstemplate/bg.jpg) repeat-x;
+    /* todo background: #FE7B09 url(/pics/csstemplate/bg.jpg) repeat-x; */
     font-size: 1em;
     height: 24px;
     line-height: 24px;
@@ -58,9 +58,9 @@ img {
 }
 
 #header {
-    background: url(/pics/csstemplate/header.jpg) no-repeat #CFDDFF center;
+    background: url(/) no-repeat #CFDDFF center;
     height: 215px;
-    float: center;
+    /* todo float: center; */
 }
 
 #header h1 {
