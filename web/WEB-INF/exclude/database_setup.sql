@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS sqli (
+  id    INT PRIMARY KEY AUTO_INCREMENT,
+  value CHAR(20)
+);
+
+CREATE TABLE IF NOT EXISTS xss (
+  id        INT PRIMARY KEY AUTO_INCREMENT,
+  user_name CHAR(20),
+  message   CHAR(100)
+)

@@ -6,6 +6,9 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="lib">
           <element id="library" level="project" name="Mojarra-1.2" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.34-bin" />
+          <element id="library" level="project" name="aspectj-1.8.4" />
+          <element id="library" level="project" name="lib" />
         </element>
       </element>
     </root>

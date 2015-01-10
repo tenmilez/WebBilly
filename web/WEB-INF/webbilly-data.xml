@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="jdbcDataSource"/>
+        <property name="mappingDirectoryLocations">
+            <value>classpath:/com/webbilly/dao/hibernate/hbm</value>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <prop key="hibernate.dialect">${database.dialect}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="genericDAO" class="com.webbilly.dao.hibernate.GenericDAO"
+          abstract="true">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+
+    <bean id="sqliDataDAOhibernate" parent="genericDAO">
+        <constructor-arg>
+            <value>com.webbilly.domain.SQLiData</value>
+        </constructor-arg>
+    </bean>
+    <bean id="xssDataDAO" parent="genericDAO">
+        <constructor-arg>
+            <value>com.webbilly.domain.XssData</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="sqliDataDAOjdbc" class="com.webbilly.dao.jdbc.SQLiDAO">
+        <property name="dataSource" ref="jdbcDataSource"/>
+    </bean>
+
+    <bean id="jdbcDataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${database.driver}"/>
+        <property name="url" value="${database.url}"/>
+        <property name="username" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
+        <property name="connectionProperties">
+            <props>
+                <prop key="allowMultiQueries">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--
+    <bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean" >
+        <property name="jndiName" value="jdbc/MySQL" />
+        <property name="lookupOnStartup" value="true" />
+        <property name="cache" value="true" />
+        <property name="proxyInterface" value="javax.sql.DataSource" />
+    </bean>
+    -->
+</beans>

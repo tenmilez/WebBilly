@@ -5,10 +5,10 @@
 
     <!--
     <import resource="recipeasy-aspects.xml" />
-    <import resource="recipeasy-data.xml" />
-    <import resource="recipeasy-service.xml" />
-    <import resource="recipeasy-spring.xml" />
     -->
+    <import resource="webbilly-data.xml"/>
+    <import resource="webbilly-spring.xml"/>
+    <import resource="webbilly-service.xml"/>
 
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -24,13 +24,26 @@
         <property name="mappings">
             <props>
                 <prop key="welcome.htm">welcomeController</prop>
-
+                <prop key="sqli.htm">SQLiController</prop>
+                <prop key="xss.htm">XssController</prop>
             </props>
         </property>
     </bean>
 
-    <bean id="welcomeController" class="com.webbilly.web.WelcomeController">
-
+    <bean id="paramResolver" class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+        <property name="paramName" value="method"/>
+        <property name="defaultMethodName" value="onInitPage"/>
     </bean>
 
+    <bean id="welcomeController" class="com.webbilly.web.WelcomeController"/>
+
+    <bean id="SQLiController" class="com.webbilly.web.SQLiController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+        <property name="sqliServices" ref="sqliServices"/>
+    </bean>
+
+    <bean id="XssController" class="com.webbilly.web.XssController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+        <property name="sqliServices" ref="sqliServices"/>
+    </bean>
 </beans>
